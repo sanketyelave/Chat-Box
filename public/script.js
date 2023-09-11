@@ -16,24 +16,6 @@ function playMessageSound() {
         }
     }, 1000);
 }
-function playMessage() {
-    const audio = document.getElementById('messageS');
-    audio.play();
-    setTimeout(function () {
-        if (!audio.paused) {
-            audio.pause();
-        }
-    }, 1000);
-}
-function playSound() {
-    const audio = document.getElementById('sound');
-    audio.play();
-    setTimeout(function () {
-        if (!audio.paused) {
-            audio.pause();
-        }
-    }, 1000);
-}
 
 
 

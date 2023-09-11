@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the container */
+#send-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+    size: 1rem;
+    position: sticky;
+    margin-top: -4.01rem;
+
+}
+
+#send-container:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the input field */
+#msgInp {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    size: 2rem;
+}
+
+#msgInp::placeholder {
+    color: #ccc;
+}
+
+/* Style the send button */
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+#ino {
+    width: 100%;
+    margin: auto;
+    display: flex;
+
+}
+
+
+
+
+
+#container {
+
+
+    background-image: url('./pawel-czerwinski-nyJY9UZnkrE-unsplash.jpg');
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    background-repeat: no-repeat;
+    /* Prevent image from repeating */
+    background-size: cover;
+    /* Cover the entire container */
+    background-position: center center;
+    /* Center the image horizontally and vertically */
+    /* Other styles for the container */
+
+}
+
+#same {
+    position: relative;
+
+}
+
+
+
+.msg {
+    max-width: 70%;
+    /* Adjust the width as needed */
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    clear: both;
+    word-wrap: break-word;
+    font-size: 16px;
+}
+
+.mid {
+    max-width: 70%;
+    /* Adjust the width as needed */
+    margin: 10px;
+    padding: 5px;
+    border-radius: 15px;
+    clear: both;
+    word-wrap: break-word;
+    font-size: 13px;
+
+}
+
+.left {
+    background-color: #f4f4f4;
+    /* Receiver's bubble color */
+    color: #333;
+    /* Text color for receiver's message */
+    float: left;
+}
+
+.center {
+
+    background-color: #f4f4f4;
+    /* Receiver's bubble color */
+    color: #333;
+    text-align: center;
+    width: 20%;
+    margin: auto;
+    margin-top: 0.8rem;
+}
+
+.right {
+    background-color: #007bff;
+    /* Sender's bubble color */
+    color: #fff;
+    /* Text color for sender's message */
+    float: right;
+}
+
+.open {
+    display: none;
+}
+
+.lr {
+    display: block;
+    height: 2rem;
+    font-size: 2rem;
+}
+
+.lt {
+    display: block;
+    height: 2rem;
+    font-size: 2rem;
+}
+
+.hide {
+    display: none;
+}

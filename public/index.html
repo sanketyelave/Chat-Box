@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="ino">
+    </div>
+    </div>
+    <div id="row">
+        <div id="container">
+        </div>
+        <form action="#" id="send-container">
+            <textarea type="text" name="msgInp" id="msgInp" placeholder="Type your message..." rows="1"
+                cols="3"></textarea>
+            <button class="btn" type="submit"> Send
+            </button>
+        </form>
+    </div>
+    </div>
+    </div>
+    <audio id="message-sound" autoplay loop>
+        <source src="a1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="messageS" autoplay loop>
+        <source src="notification.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sound" autoplay loop>
+        <source src="sneez.mp3" type="audio/mpeg">
+    </audio>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js">
+
+    </script>
+</body>
+
+</html>

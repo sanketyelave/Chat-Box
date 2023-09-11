@@ -74,7 +74,7 @@ const center = (message, position) => {
 
 socket.on('user-joined', name => {
     center(`🟢 ${name} joined the room`, 'center')
-    playMessage();
+    
 })
 
 socket.on('receive', data => {
@@ -82,7 +82,7 @@ socket.on('receive', data => {
 })
 socket.on('user-joined', name => {
     center(`❌ ${name} left the room`, 'center')
-    playSound();
+    
 })
 
 // const join = (message, position) => {

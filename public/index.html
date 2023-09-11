@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vChat</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the container */
+        #send-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease-in-out;
+            size: 1rem;
+            position: sticky;
+            margin-top: -4.01rem;
+        }
+
+        @media (max-width:760px) {
+            #send-container {
+                margin-top: -8.01rem;
+            }
+
+        }
+
+
+        #send-container:hover {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style the input field */
+        #msgInp {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+            size: 2rem;
+        }
+
+        #msgInp::placeholder {
+            color: #ccc;
+        }
+
+        /* Style the send button */
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+
+        #ino {
+            width: 100%;
+            margin: auto;
+            display: flex;
+
+        }
+
+
+
+
+
+        #container {
+
+
+            background-image: url('./pawel-czerwinski-nyJY9UZnkrE-unsplash.jpg');
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            background-repeat: no-repeat;
+            /* Prevent image from repeating */
+            background-size: cover;
+            /* Cover the entire container */
+            background-position: center center;
+            /* Center the image horizontally and vertically */
+            /* Other styles for the container */
+
+        }
+
+        #same {
+            position: relative;
+
+        }
+
+
+
+        .msg {
+            max-width: 70%;
+            /* Adjust the width as needed */
+            margin: 10px;
+            padding: 10px;
+            border-radius: 15px;
+            clear: both;
+            word-wrap: break-word;
+            font-size: 16px;
+        }
+
+        .mid {
+            max-width: 70%;
+            /* Adjust the width as needed */
+            margin: 10px;
+            padding: 5px;
+            border-radius: 15px;
+            clear: both;
+            word-wrap: break-word;
+            font-size: 13px;
+
+        }
+
+        .left {
+            background-color: #f4f4f4;
+            /* Receiver's bubble color */
+            color: #333;
+            /* Text color for receiver's message */
+            float: left;
+        }
+
+        .center {
+
+            background-color: #f4f4f4;
+            /* Receiver's bubble color */
+            color: #333;
+            text-align: center;
+            width: 20%;
+            margin: auto;
+            margin-top: 0.8rem;
+        }
+
+        .right {
+            background-color: #007bff;
+            /* Sender's bubble color */
+            color: #fff;
+            /* Text color for sender's message */
+            float: right;
+        }
+
+        .open {
+            display: none;
+        }
+
+        .lr {
+            display: block;
+            height: 2rem;
+            font-size: 2rem;
+        }
+
+        .lt {
+            display: block;
+            height: 2rem;
+            font-size: 2rem;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="ino">
+    </div>
+    </div>
+    <div id="row">
+        <div id="container">
+        </div>
+        <form action="#" id="send-container">
+            <textarea type="text" name="msgInp" id="msgInp" placeholder="Type your message..." rows="1"
+                cols="3"></textarea>
+            <button class="btn" type="submit"> Send
+            </button>
+        </form>
+    </div>
+    </div>
+    </div>
+    <audio id="message-sound" autoplay loop>
+        <source src="a1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js">
+
+    </script>
+
+    <script>
+        const socket = io();
+
+        const form = document.getElementById('send-container')
+        const messageInput = document.getElementById('msgInp')
+        const messageContainer = document.getElementById('container')
+        const information = document.getElementById('info')
+        const dembo = document.getElementById('dembo')
+
+        //For sound to seek more user's attention
+        function playMessageSound() {
+            const audio = document.getElementById('message-sound');
+            audio.play();
+            setTimeout(function () {
+                if (!audio.paused) {
+                    audio.pause();
+                }
+            }, 1000);
+        }
+
+
+
+
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = messageInput.value;
+            if (messageInput.value.trim() === '') {
+                alert('Message should not be emptym 🫗')
+            } else {
+                append(`${message}`, 'right');
+                socket.emit('send', message);
+                playMessageSound();
+            }
+            messageInput.value = ''
+            // audioPlayer.play();
+        })
+
+        const name = prompt('Whats your name')
+        socket.emit('New-user-joined', name)
+
+        const append = (message, position) => {
+            const create = document.createElement('div')
+            create.innerHTML = message;
+            create.classList.add('msg');
+            create.classList.add(position);
+            messageContainer.appendChild(create)
+
+        }
+        const center = (message, position) => {
+            const create = document.createElement('div')
+            create.innerHTML = message;
+            create.classList.add('mid');
+            create.classList.add(position);
+            messageContainer.appendChild(create)
+
+        }
+
+        socket.on('user-joined', name => {
+            center(`🟢 ${name} joined the room`, 'center')
+
+        })
+
+        socket.on('receive', data => {
+            append(`${data.users}:${data.message}`, 'left')
+        })
+        socket.on('user-joined', name => {
+            center(`❌ ${name} left the room`, 'center')
+
+        })
+
+        // const join = (message, position) => {
+        //     const create = document.createElement('div')
+        //     create.innerHTML = message;
+        //     dembo.classList.remove('hide');
+        //     create.classList.add(position);
+        //     information.appendChild(create)
+
+        // }
+        // const left = (message, position) => {
+        //     const create = document.createElement('div')
+        //     create.innerHTML = message;
+        //     dembo.classList.add('hide');
+        //     create.classList.add(position);
+        //     information.appendChild(create)
+
+        // }
+        // const videoPlayer = document.getElementById('videoPlayer');
+
+        // const cam = document.getElementById('camera')
+        // var camera = () => {
+        //     cam.classList.remove('open');
+        //     cl.classList.add('open');
+        //     console.log('hello')
+        // }
+
+        // const uplode = document.getElementById('imageUploadForm');
+        // const Fuplode = document.getElementById('fileInput');
+        // uplode.addEventListener('submit', (event) => {
+        //     event.preventDefault();
+
+        //     const file = Fuplode.files[0];
+        //     if (file) {
+        //         const reader = new FileReader();
+
+        //         reader.onload = (event) => {
+        //             const imageData = event.target.result;
+        //             socket.emit('image', imageData);
+        //         };
+
+        //         reader.readAsBinaryString(file);
+        //     }
+        // });
+
+        // const cl = document.getElementById('close')
+        // const debo = () => {
+        //     cl.classList.remove('open');
+        //     cam.classList.add('open');
+        //     console.log('clicked')
+        // }
+
+    </script>
+</body>
+
+</html>

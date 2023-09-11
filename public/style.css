@@ -160,3 +160,9 @@
 .hide {
     display: none;
 }
+@media (max-width:760px) {
+    #send-container{
+        margin-top: -8.01rem;
+    }
+
+    }
